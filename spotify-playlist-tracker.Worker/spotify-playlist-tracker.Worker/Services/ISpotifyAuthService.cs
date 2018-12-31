@@ -5,7 +5,9 @@ namespace spotify_playlist_tracker.Worker.Services
 {
     public interface ISpotifyAuthService
     {
-        Token Token { get; set; }
+        Token GetToken();
+        void SetToken(Token token);        
         AuthParameters GetAuthParameters();
+
     }
 }

@@ -26,9 +26,9 @@ namespace spotify_playlist_tracker.Worker.Controllers
             var token = AuthorizationCode.ProcessCallback(_spotifyAuthService.GetAuthParameters(), code);
 
             //// Use the api with access to personal data.
-            _spotifyAuthService.Token = token;
+            _spotifyAuthService.SetToken(token);
             var api = new SpotifyWebApi.SpotifyWebApi(token);
-            var me = api.Player.GetCurrentlyPlaying();
+            var me = api.Player.GetCurrentlyPlayingContext();
             var res = me.Result;
             return View();
         }

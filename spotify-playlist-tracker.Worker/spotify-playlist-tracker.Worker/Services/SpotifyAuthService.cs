@@ -14,24 +14,29 @@ namespace spotify_playlist_tracker.Worker.Services
     {
         private readonly IOptions<SettingsModel> _settings;
 
+        private Token _token;
+
         public SpotifyAuthService(IOptions<SettingsModel> settings)
         {
             _settings = settings;
         }
 
-        public Token Token {
-            get
+        public Token GetToken()
+        {
+            if (_token == null)
             {
-                if (Token.IsExpired)
-                {
-                    Token = AuthorizationCode.RefreshToken(GetAuthParameters(), Token);
-                }
-                return Token;
+                return null;
             }
-            set
+            if (_token.IsExpired)
             {
-                Token = value;
+                _token = AuthorizationCode.RefreshToken(GetAuthParameters(), _token);
             }
+            return _token;
+        }
+
+        public void SetToken(Token token)
+        {
+            _token = token;
         }
 
         public AuthParameters GetAuthParameters()
