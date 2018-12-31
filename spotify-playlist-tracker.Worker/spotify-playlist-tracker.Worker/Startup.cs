@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using spotify_playlist_tracker.Worker.Infrastructure.Settings;
 
 namespace spotify_playlist_tracker.Worker
 {
@@ -31,7 +32,7 @@ namespace spotify_playlist_tracker.Worker
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.Configure<SettingsModel>(Configuration.GetSection("Settings"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
