@@ -1,4 +1,6 @@
 ﻿using spotify_playlist_tracker.Worker.Models.Storage;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace spotify_playlist_tracker.Worker.Services
 {
@@ -6,5 +8,6 @@ namespace spotify_playlist_tracker.Worker.Services
     {
         void AddTrack(TrackEntity track);
         void ClearAllTracks();
+        Task<List<TrackEntity>> GetPlayedTracks();
     }
 }

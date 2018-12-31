@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -34,6 +36,23 @@ namespace spotify_playlist_tracker.Worker.Services
             var tracksTable = GetTracksCloudTable();
 
             await tracksTable.DeleteIfExistsAsync();
+        }
+
+
+        public async Task<List<TrackEntity>> GetPlayedTracks()
+        {
+            var tracksTable = GetTracksCloudTable();
+
+            TableContinuationToken token = null;
+            var entities = new List<TrackEntity>();
+            do
+            {
+                var queryResult = await tracksTable.ExecuteQuerySegmentedAsync(new TableQuery<TrackEntity>(), token);
+                entities.AddRange(queryResult.Results);
+                token = queryResult.ContinuationToken;
+            } while (token != null);
+
+            return entities;
         }
 
         private CloudTable GetTracksCloudTable()
