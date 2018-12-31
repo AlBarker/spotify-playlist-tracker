@@ -2,5 +2,6 @@
 {
     public class SettingsModel
     {
+        public string StorageConnectionString { get; set; }
     }
 }
