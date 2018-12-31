@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using spotify_playlist_tracker.Worker.Services;
 using SpotifyWebApi.Auth;
 using SpotifyWebApi.Model.Enum;
 
@@ -12,23 +13,20 @@ namespace spotify_playlist_tracker.Worker.Controllers
 {
     public class CallbackController : Controller
     {
+        private readonly ISpotifyAuthService _spotifyAuthService;
+
+        public CallbackController(ISpotifyAuthService spotifyAuthService)
+        {
+            _spotifyAuthService = spotifyAuthService;
+        }
+
         // GET: /<controller>/
         public IActionResult Index(string code, string state)
         {
-
-            //var state = Guid.NewGuid().ToString(); // Save this state because you must check it later
-            var parameters = new AuthParameters
-            {
-                ClientId = "",
-                ClientSecret = "",
-                RedirectUri = "https://localhost:44362/callback",
-                Scopes = Scope.All,
-                ShowDialog = true
-            };
-
-            var token = AuthorizationCode.ProcessCallback(parameters, code);
+            var token = AuthorizationCode.ProcessCallback(_spotifyAuthService.GetAuthParameters(), code);
 
             //// Use the api with access to personal data.
+            _spotifyAuthService.Token = token;
             var api = new SpotifyWebApi.SpotifyWebApi(token);
             var me = api.Player.GetCurrentlyPlaying();
             var res = me.Result;

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using spotify_playlist_tracker.Worker.Infrastructure.Settings;
+using spotify_playlist_tracker.Worker.Services;
 
 namespace spotify_playlist_tracker.Worker
 {
@@ -33,6 +29,7 @@ namespace spotify_playlist_tracker.Worker
             });
 
             services.Configure<SettingsModel>(Configuration.GetSection("Settings"));
+            services.AddSingleton<ISpotifyAuthService, SpotifyAuthService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

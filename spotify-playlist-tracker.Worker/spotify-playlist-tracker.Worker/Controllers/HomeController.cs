@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using spotify_playlist_tracker.Worker.Models;
+using spotify_playlist_tracker.Worker.Services;
 using SpotifyWebApi.Auth;
 using SpotifyWebApi.Model.Enum;
 
@@ -12,20 +13,16 @@ namespace spotify_playlist_tracker.Worker.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ISpotifyAuthService _spotifyAuthService;
+
+        public HomeController(ISpotifyAuthService spotifyAuthService)
+        {
+            _spotifyAuthService = spotifyAuthService;
+        }
+
         public IActionResult Index()
         {
-            var state = Guid.NewGuid().ToString(); // Save this state because you must check it later
-
-            var parameters = new AuthParameters
-            {
-                ClientId = "",
-                ClientSecret = "",
-                RedirectUri = "https://localhost:44362/callback",
-                Scopes = Scope.All,
-                ShowDialog = true
-            };
-
-            var url = AuthorizationCode.GetUrl(parameters, state);
+            var url = AuthorizationCode.GetUrl(_spotifyAuthService.GetAuthParameters(), "");
 
             return Redirect(url);
         }
