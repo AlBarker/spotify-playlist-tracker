@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Hangfire;
+using Hangfire.MemoryStorage;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +32,10 @@ namespace spotify_playlist_tracker.Worker
 
             services.Configure<SettingsModel>(Configuration.GetSection("Settings"));
             services.AddSingleton<ISpotifyAuthService, SpotifyAuthService>();
+            services.AddSingleton<IStorageService, StorageService>();
+
+            services.AddHangfire(x => x.UseMemoryStorage());
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -57,6 +63,9 @@ namespace spotify_playlist_tracker.Worker
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
         }
     }
 }

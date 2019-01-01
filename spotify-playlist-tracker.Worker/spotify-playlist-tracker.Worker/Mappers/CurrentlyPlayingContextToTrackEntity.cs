@@ -10,6 +10,8 @@ namespace spotify_playlist_tracker.Worker.Mappers
         {
             return new TrackEntity()
             {
+                RowKey = currentlyPlayingContext.Item.Id,
+                PartitionKey = currentlyPlayingContext.Item.Artists.Select(x => x.Name).FirstOrDefault(),
                 Name = currentlyPlayingContext.Item.Name,
                 Artists = currentlyPlayingContext.Item.Artists.Select(x => x.Name).ToList(),
                 Popularity = currentlyPlayingContext.Item.Popularity,

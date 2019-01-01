@@ -8,6 +8,8 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.6.21" />
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="SpotifyWebApi-Core" Version="0.0.9-beta.8" />
