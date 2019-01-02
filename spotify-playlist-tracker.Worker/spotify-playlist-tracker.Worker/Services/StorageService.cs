@@ -25,7 +25,7 @@ namespace spotify_playlist_tracker.Worker.Services
             TableOperation insertOperation = TableOperation.Insert(track);
 
             var tracksTable = GetTracksCloudTable();
-
+            // TODO Fix exception here on duplicate
             // Execute the insert operation.
             await tracksTable.ExecuteAsync(insertOperation);
 
