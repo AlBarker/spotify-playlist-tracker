@@ -22,9 +22,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
 
         public IActionResult Index()
         {
-            var url = AuthorizationCode.GetUrl(_spotifyAuthService.GetAuthParameters(), "");
-
-            return Redirect(url);
+            return View();
         }
 
         public IActionResult Privacy()

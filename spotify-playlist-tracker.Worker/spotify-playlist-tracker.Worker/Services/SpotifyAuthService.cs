@@ -16,6 +16,8 @@ namespace spotify_playlist_tracker.Worker.Services
 
         private Token _token;
 
+        public bool IsListening { get; set; }
+
         public SpotifyAuthService(IOptions<SettingsModel> settings)
         {
             _settings = settings;

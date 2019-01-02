@@ -18,12 +18,10 @@ namespace spotify_playlist_tracker.Worker.Controllers
     public class CallbackController : Controller
     {
         private readonly ISpotifyAuthService _spotifyAuthService;
-        private readonly IStorageService _storageService;
 
-        public CallbackController(ISpotifyAuthService spotifyAuthService, IStorageService storageService)
+        public CallbackController(ISpotifyAuthService spotifyAuthService)
         {
             _spotifyAuthService = spotifyAuthService;
-            _storageService = storageService;
         }
 
         // GET: /<controller>/
@@ -33,24 +31,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
 
             //// Use the api with access to personal data.
             _spotifyAuthService.SetToken(token);
-            var api = new SpotifyWebApi.SpotifyWebApi(token);
-            var me = api.Player.GetCurrentlyPlayingContext();
-            var res = me.Result;
-            Task.Run(() => FetchTrackAndAdd(_spotifyAuthService, _storageService));
-            return View();
-        }
-
-        private static void FetchTrackAndAdd(ISpotifyAuthService spotifyAuthService, IStorageService storageService)
-        {
-            while (true)
-            {
-                var api = new SpotifyWebApi.SpotifyWebApi(spotifyAuthService.GetToken());
-                var currentlyPlayingContext = api.Player.GetCurrentlyPlayingContext().Result;
-                var track = CurrentlyPlayingContextToTrackEntity.Map(currentlyPlayingContext);
-                storageService.AddTrack(track);
-
-                Thread.Sleep(1000 * 60);
-            }
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace spotify_playlist_tracker.Worker.Services
         Token GetToken();
         void SetToken(Token token);        
         AuthParameters GetAuthParameters();
+        bool IsListening { get; set; }
 
     }
 }
