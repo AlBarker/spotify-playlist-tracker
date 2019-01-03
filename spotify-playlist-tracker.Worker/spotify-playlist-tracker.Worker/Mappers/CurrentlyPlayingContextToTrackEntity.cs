@@ -13,7 +13,7 @@ namespace spotify_playlist_tracker.Worker.Mappers
                 RowKey = currentlyPlayingContext.Item.Id,
                 PartitionKey = currentlyPlayingContext.Item.Artists.Select(x => x.Name).FirstOrDefault(),
                 Name = currentlyPlayingContext.Item.Name,
-                Artists = currentlyPlayingContext.Item.Artists.Select(x => x.Name).ToList(),
+                Artist = currentlyPlayingContext.Item.Artists.FirstOrDefault().Name,
                 Popularity = currentlyPlayingContext.Item.Popularity,
                 TrackLength = currentlyPlayingContext.Item.DurationMs,
                 Album = currentlyPlayingContext.Item.Album.Name,

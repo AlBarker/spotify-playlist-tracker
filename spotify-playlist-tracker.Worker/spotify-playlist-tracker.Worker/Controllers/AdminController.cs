@@ -38,6 +38,12 @@ namespace spotify_playlist_tracker.Worker.Controllers
             return RedirectToAction("index");
         }
 
+        public IActionResult ClearTracks()
+        {
+            _storageService.ClearAllTracks();
+            return RedirectToAction("index");
+        }
+
         public IActionResult FetchToken()
         {
             var url = AuthorizationCode.GetUrl(_spotifyAuthService.GetAuthParameters(), "");
@@ -54,7 +60,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
                 var track = CurrentlyPlayingContextToTrackEntity.Map(currentlyPlayingContext);
                 storageService.AddTrack(track);
 
-                Thread.Sleep(1000 * 60);
+                Thread.Sleep(currentlyPlayingContext.Item.DurationMs - currentlyPlayingContext.ProgressMs.Value + 1000);
             }
         }
     }

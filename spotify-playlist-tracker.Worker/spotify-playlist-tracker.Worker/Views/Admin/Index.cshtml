@@ -4,8 +4,9 @@
 
 <div class="text-center">
     <h1 class="display-4">Admin</h1>
-    
-    <input type="button" disabled="@ViewBag.HasToken" value ="Fetch token" onclick="location.href='@Url.Action("FetchToken", "Admin")'" />
+
+    <input type="button" disabled="@ViewBag.HasToken" value="Fetch token" onclick="location.href='@Url.Action("FetchToken", "Admin")'" />
     <input type="button" disabled="@ViewBag.IsListening" value="Start listening..." onclick="location.href='@Url.Action("StartListening", "Admin")'" />
     <input type="button" disabled="@(!ViewBag.IsListening)" value="Stop listening..." onclick="location.href='@Url.Action("StopListening", "Admin")'" />
+    <input type="button" disabled="@(!ViewBag.IsListening)" value="Clear all tracks" onclick="location.href='@Url.Action("ClearTracks", "Admin")'" />
 </div>
