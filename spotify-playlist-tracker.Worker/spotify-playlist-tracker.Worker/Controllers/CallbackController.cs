@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using spotify_playlist_tracker.Worker.Mappers;
 using spotify_playlist_tracker.Worker.Services;

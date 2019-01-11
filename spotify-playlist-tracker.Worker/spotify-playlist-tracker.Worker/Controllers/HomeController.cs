@@ -40,7 +40,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
                     {
                         Name = track.Track.Name,
                         Artist = track.Track.Artists.FirstOrDefault().Name,
-                        AddedBy = track.AddedBy.DisplayName
+                        AddedBy = track.AddedBy.Id
                     });
                 }
             }

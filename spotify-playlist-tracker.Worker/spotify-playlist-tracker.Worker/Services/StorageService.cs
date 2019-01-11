@@ -27,7 +27,17 @@ namespace spotify_playlist_tracker.Worker.Services
 
             var tracksTable = GetTracksCloudTable();
             // TODO Fix exception here on duplicate
+
+            TableOperation retrieve = TableOperation.Retrieve<TrackEntity>(track.PartitionKey, track.RowKey);
+            TableResult result = await tracksTable.ExecuteAsync(retrieve);
+
+            if (result.Result != null)
+            {
+                return;
+            }
+
             // Execute the insert operation.
+
             await tracksTable.ExecuteAsync(insertOperation);
 
         }
