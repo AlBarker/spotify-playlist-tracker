@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
 namespace spotify_playlist_tracker.Worker.ViewModels
 {
-    public class PlayedTrackViewModel
+    public class PlayedTrackViewModel : TableEntity
     {
         public string Name { get; set; }
         public string Artist { get; set; }

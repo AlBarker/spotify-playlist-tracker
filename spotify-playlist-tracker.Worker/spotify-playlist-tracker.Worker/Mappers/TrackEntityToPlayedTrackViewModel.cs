@@ -14,6 +14,8 @@ namespace spotify_playlist_tracker.Worker.Mappers
         {
             return new PlayedTrackViewModel
             {
+                RowKey = Guid.NewGuid().ToString(),
+                PartitionKey = Guid.NewGuid().ToString(),
                 Name = track.Name,
                 Artist = track.Artist,
                 Album = track.Album,

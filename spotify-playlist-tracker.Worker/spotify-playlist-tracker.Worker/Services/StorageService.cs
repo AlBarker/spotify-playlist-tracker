@@ -7,6 +7,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using spotify_playlist_tracker.Worker.Infrastructure.Settings;
 using spotify_playlist_tracker.Worker.Models.Storage;
+using spotify_playlist_tracker.Worker.ViewModels;
 
 namespace spotify_playlist_tracker.Worker.Services
 {
@@ -18,6 +19,7 @@ namespace spotify_playlist_tracker.Worker.Services
         {
             _settings = settings;
         }
+
         public async void AddTrack(TrackEntity track)
         {
             CreateTracksTableIfNotExists();
@@ -37,7 +39,6 @@ namespace spotify_playlist_tracker.Worker.Services
             }
 
             // Execute the insert operation.
-
             await tracksTable.ExecuteAsync(insertOperation);
 
         }
@@ -84,6 +85,31 @@ namespace spotify_playlist_tracker.Worker.Services
 
             // Create the table if it doesn't exist.
             await tracksTable.CreateIfNotExistsAsync();
+        }
+
+        public async Task AddPlayedTracksAsync(List<PlayedTrackViewModel> playedTrackViewModels)
+        {
+            // Retrieve the storage account from the connection string.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_settings.Value.StorageConnectionString);
+
+            // Create the table client.
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            var tableName = "playedtracks" + DateTime.Now.ToString("yyyyMMddTHHmmssZ");
+
+            // Retrieve a reference to the table.
+            var playedTracksTable = tableClient.GetTableReference(tableName);
+
+            // Create the table if it doesn't exist.
+            await playedTracksTable.CreateIfNotExistsAsync();
+
+            foreach (var track in playedTrackViewModels)
+            {
+                // Create the TableOperation that inserts the customer entity.
+                TableOperation insertOperation = TableOperation.Insert(track);
+                // Execute the insert operation.
+                await playedTracksTable.ExecuteAsync(insertOperation);
+            }
         }
     }
 }
