@@ -32,6 +32,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
                 { "1238290776", "Joshua Landy" },
                 { "1233033915", "Alex Barker" },
                 { "1244598275", "Dan Hornblower" },
+                { "0o061owch3c4i23oxchbq5tll", "Josh Anderson" }
             };
 
         }
