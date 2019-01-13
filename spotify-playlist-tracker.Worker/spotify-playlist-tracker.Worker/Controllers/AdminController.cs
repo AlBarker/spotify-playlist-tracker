@@ -57,10 +57,17 @@ namespace spotify_playlist_tracker.Worker.Controllers
             {
                 var api = new SpotifyWebApi.SpotifyWebApi(spotifyAuthService.GetToken());
                 var currentlyPlayingContext = api.Player.GetCurrentlyPlayingContext().Result;
-                var track = CurrentlyPlayingContextToTrackEntity.Map(currentlyPlayingContext);
-                storageService.AddTrack(track);
+                if (currentlyPlayingContext != null)
+                {
+                    var track = CurrentlyPlayingContextToTrackEntity.Map(currentlyPlayingContext);
+                    storageService.AddTrack(track);
 
-                Thread.Sleep(currentlyPlayingContext.Item.DurationMs - currentlyPlayingContext.ProgressMs.Value + 1000);
+                    Thread.Sleep(currentlyPlayingContext.Item.DurationMs - currentlyPlayingContext.ProgressMs.Value + 2000);
+                }
+                else
+                {
+                    Thread.Sleep(30 * 1000);
+                }
             }
         }
     }
