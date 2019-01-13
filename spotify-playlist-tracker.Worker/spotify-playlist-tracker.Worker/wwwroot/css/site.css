@@ -81,6 +81,16 @@ p {
     padding: 2px 16px;
 }
 
+.now-playing {
+    margin-bottom: 10px;
+    border: 2px solid green;
+}
+
+.track-name {
+    max-height: 40px;
+    overflow: auto;
+}
+
 /* Add rounded corners to the top left and the top right corner of the image */
 img {
     height: 130px;
@@ -93,4 +103,9 @@ img {
     top: 86px;
     color: white;
     -webkit-text-stroke: 1px black;
+}
+
+.progress-bar {
+    padding-left: 10px;
+    color: darkblue;
 }

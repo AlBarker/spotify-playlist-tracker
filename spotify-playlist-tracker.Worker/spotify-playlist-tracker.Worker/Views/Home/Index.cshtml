@@ -3,17 +3,17 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
     <div class="track-list">
+        <h4>Now playing</h4>
         @for (var i = ViewBag.PlayedTracks.Count - 1; i >= 0; i--)
         {
-            <div class="card">
+            <div class="card @(i == ViewBag.PlayedTracks.Count - 1 ? "now-playing" : "")">
                 @{ var track = ViewBag.PlayedTracks[i]; }
                 <img src="@track.AlbumArtUrl">
                 <div class="container">
                     <h1 class="position">@track.Position</h1>
                     <div class="card-text">
-                        <h5><b>@track.Name</b></h5>
+                        <h5 class="track-name"><b>@track.Name</b></h5>
                         <p>@track.Artist</p>
                         <p>Added by: @track.AddedBy</p>
                         <div class="progress">

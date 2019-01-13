@@ -18,11 +18,22 @@ namespace spotify_playlist_tracker.Worker.Controllers
     {
         private readonly IStorageService _storageService;
         private readonly ISpotifyAuthService _spotifyAuthService;
+        private Dictionary<string, string> _usernames;
 
         public HomeController(IStorageService storageService, ISpotifyAuthService spotifyAuthService)
         {
             _storageService = storageService;
             _spotifyAuthService = spotifyAuthService;
+            _usernames = new Dictionary<string, string>
+            {
+                { "karnage11i", "Alex Karney" },
+                { "magsatire", "Jack McGrath" },
+                { "1232101260", "Chris Quigley" },
+                { "1238290776", "Joshua Landy" },
+                { "1233033915", "Alex Barker" },
+                { "1244598275", "Dan Hornblower" },
+            };
+
         }
 
         public IActionResult Index()
@@ -40,7 +51,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
                     {
                         Name = track.Track.Name,
                         Artist = track.Track.Artists.FirstOrDefault().Name,
-                        AddedBy = track.AddedBy.Id
+                        AddedBy = _usernames.GetValueOrDefault(track.AddedBy.Id)
                     });
                 }
             }
