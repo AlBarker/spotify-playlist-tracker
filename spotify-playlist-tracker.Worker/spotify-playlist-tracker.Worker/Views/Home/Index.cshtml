@@ -10,10 +10,12 @@
             <div class="card @(i == ViewBag.PlayedTracks.Count - 1 ? "now-playing" : "")">
                 @{ var track = ViewBag.PlayedTracks[i]; }
                 <img src="@track.AlbumArtUrl">
-                <div class="container">
+                <div class="container" id="trackcontainer">
                     <h1 class="position">@track.Position</h1>
                     <div class="card-text">
-                        <h5 class="track-name"><b>@track.Name</b></h5>
+                        <div class="title-text">
+                            <h5 class="track-name"><b>@track.Name</b></h5>
+                        </div>
                         <p>@track.Artist</p>
                         <p>Added by: @track.AddedBy</p>
                         <div class="progress">
