@@ -51,6 +51,31 @@
         </div>
     </footer>
 
+    <div class="bottombar">
+        <div class="bottombox">
+            <div class="countnum">
+                BEERS:<br>
+                1
+                @*<span id="click-001">@counter.beers</span>*@
+            </div>
+            <div class="buttonpic">
+                <input type="image" class="button" src="image/beer3.png" name ="beerbutton"alt="Beer me!" />
+            </div>
+        </div>
+
+        <div class="bottombox">
+            <div class="countnum">
+                SNAGS:<br>
+                1
+                @*<span id="click-002">@counter.snags</span>*@
+            </div>
+            <div class="buttonpic">
+                <input type="image" class="button" src="image/snag3.png" name ="snagbutton" alt="Snag me!" />
+            </div>
+        </div>
+
+    </div>
+
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -72,5 +97,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
