@@ -30,7 +30,10 @@ namespace spotify_playlist_tracker.Worker.Controllers
                 { "1238290776", "Joshua Landy" },
                 { "1233033915", "Alex Barker" },
                 { "1244598275", "Dan Hornblower" },
-                { "0o061owch3c4i23oxchbq5tll", "Josh Anderson" }
+                { "0o061owch3c4i23oxchbq5tll", "Josh Anderson" },
+                { "12138108557", "Veashka Rojas" },
+                { "gardenbed", "Georgia Robinson" },
+                { "billysakalis", "Billy Sakalis" }
             };
         }
 
@@ -74,7 +77,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
             if (_spotifyAuthService.GetToken() != null)
             {
                 var api = new SpotifyWebApi.SpotifyWebApi(_spotifyAuthService.GetToken());
-                var fullPlaylistTracks = api.Playlist.GetPlaylistTracks(SpotifyUri.Make("1233033915", "3bdydssu6hXzOP4kLrI8cL")).Result;
+                var fullPlaylistTracks = api.Playlist.GetPlaylistTracks(SpotifyUri.Make("1233033915", "6LJOm2SkbNEsmANfIGhemx")).Result;
 
                 foreach (var track in fullPlaylistTracks)
                 {

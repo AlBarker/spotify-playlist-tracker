@@ -35,18 +35,21 @@ namespace spotify_playlist_tracker.Worker.Controllers
                 { "0o061owch3c4i23oxchbq5tll", "Josh Anderson" },
                 { "12138108557", "Veashka Rojas" },
                 { "gardenbed", "Georgia Robinson" },
-                { "billysakalis", "Billy Sakalis" }
+                { "billysakalis", "Billy Sakalis" },
+                { "", "Braeden Wilson" },
+                { "", "Matt Knightbridge" },
+                { "", "Griffyn Heels" }
             };
         }
 
         public IActionResult Index()
         {
-            var playlistTracks = new List<PlaylistTrack>();
+          var playlistTracks = new List<PlaylistTrack>();
 
             if (_spotifyAuthService.GetToken() != null)
             {
                 var api = new SpotifyWebApi.SpotifyWebApi(_spotifyAuthService.GetToken());
-                var fullPlaylistTracks = api.Playlist.GetPlaylistTracks(SpotifyUri.Make("1233033915", "1zjHL1Cxo235n1keiC5IDw")).Result;
+                var fullPlaylistTracks = api.Playlist.GetPlaylistTracks(SpotifyUri.Make("1233033915", "6LJOm2SkbNEsmANfIGhemx")).Result;
 
                 foreach (var track in fullPlaylistTracks)
                 {
