@@ -9,6 +9,7 @@ namespace spotify_playlist_tracker.Worker.ViewModels
         public string Album { get; set; }
         public string AlbumArtUrl { get; set; }
         public string AddedBy { get; set; }
+        public string AddedByImage { get; set; }
         public int Popularity { get; set; }
         public int Position { get; set; }
         public int TrackLength { get; set; }

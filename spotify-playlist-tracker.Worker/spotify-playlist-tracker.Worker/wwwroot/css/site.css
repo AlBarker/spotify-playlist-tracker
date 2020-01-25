@@ -58,7 +58,7 @@ body {
     transition: 0.3s;
     width: 95%;
     margin: auto;
-    height: 130px;
+    height: 140px;
     display:flex;
     flex-direction: row;
 }
@@ -72,6 +72,9 @@ p {
     display: flex;
     flex-direction: column;
     text-align: left;
+    height: 100%;
+    justify-content: space-between;
+    padding: 5px 0px 5px 0px;
 }
 
 /* Add some padding inside the card container */
@@ -82,7 +85,7 @@ p {
 .now-playing {
     margin-bottom: 10px;
     outline: 3px solid green;
-    height: 132px;
+    height: 142px;
 }
 
 .title-text {
@@ -98,9 +101,11 @@ p {
 }
 
 /* Add rounded corners to the top left and the top right corner of the image */
-img {
-    height: 130px;
-    width: 130px;
+.album-art {
+    height: 140px;
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
 }
 
 .position {
@@ -175,3 +180,19 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+
+.portrait {
+    position: absolute;
+    right: -40px;
+    height: 80px;
+    width: 80px;
+}
+
+@media (min-width: 768px) {
+    .portrait {
+        right: -60px;
+        height: 110px;
+        width: 110px;
+    }
+}
+

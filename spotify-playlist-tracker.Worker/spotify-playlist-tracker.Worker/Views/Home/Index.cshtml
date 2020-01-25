@@ -7,26 +7,40 @@
         <h4>Now playing</h4>
         @for (var i = ViewBag.PlayedTracks.Count - 1; i >= 0; i--)
         {
-            <div class="card @(i == ViewBag.PlayedTracks.Count - 1 ? "now-playing" : "")">
-                @{ var track = ViewBag.PlayedTracks[i]; }
-                <img src="@track.AlbumArtUrl">
-                <div class="container" id="trackcontainer">
-                    <h1 class="position">@track.Position</h1>
-                    <div class="card-text">
-                        <div class="title-text">
-                            <h5 class="track-name"><b>@track.Name</b></h5>
-                        </div>
-                        <p>@track.Artist</p>
-                        <p>Added by: @track.AddedBy</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:@(100 - track.Popularity)%">
-                                Edge-o-meter score: @(100 - track.Popularity)
-                            </div>
+        <div class="card @(i == ViewBag.PlayedTracks.Count - 1 ? "now-playing" : "")">
+            @{ var track = ViewBag.PlayedTracks[i]; }
+            <img class="album-art" src="@track.AlbumArtUrl">
+            <div class="container" id="trackcontainer">
+                <h1 class="position">@track.Position</h1>
+                <div class="card-text">
+                    <div class="title-text">
+                        <h5 class="track-name"><b>@track.Name</b></h5>
+                    </div>
+                    <p>@track.Artist</p>
+                    <p>Added by: @track.AddedBy</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100" style="width:@(100 - track.Popularity)%">
+                            Edge-o-meter score: @(100 - track.Popularity)
                         </div>
                     </div>
                 </div>
             </div>
+            @if (track.Position == 69)
+            {
+                <img class="portrait" src="~/image/bs.png" )" />
+            }
+            else
+            {
+                <img class="portrait" src="~/image/@(track.AddedByImage + ".png")" />
+            }
+
+            @if (track.Position != 1)
+            {
+                <img class="portrait" src="~/image/crown.png" )" />
+            }
+
+        </div>
         }
     </div>
 </div>

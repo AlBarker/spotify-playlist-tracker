@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,10 +31,13 @@ namespace spotify_playlist_tracker.Worker.Controllers
                 { "1238290776", "Joshua Landy" },
                 { "1233033915", "Alex Barker" },
                 { "1244598275", "Dan Hornblower" },
-                { "0o061owch3c4i23oxchbq5tll", "Josh Anderson" },
+                { "genjamon1234", "Josh Anderson" },
                 { "12138108557", "Veashka Rojas" },
                 { "gardenbed", "Georgia Robinson" },
-                { "billysakalis", "Billy Sakalis" }
+                { "billysakalis", "Billy Sakalis" },
+                { "braeden.wilson", "Braeden Wilson" },
+                { "1278556031", "Matt Knightbridge" },
+                { "griffkyn22", "Griffyn Heels" }
             };
         }
 

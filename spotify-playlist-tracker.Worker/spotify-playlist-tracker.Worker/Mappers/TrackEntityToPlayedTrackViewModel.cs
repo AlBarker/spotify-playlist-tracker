@@ -12,6 +12,7 @@ namespace spotify_playlist_tracker.Worker.Mappers
     {
         public static PlayedTrackViewModel Map(TrackEntity track, int index, List<PlaylistTrack> playlistTracks)
         {
+            var playlistTrack = playlistTracks.Find(x => x.Name == track.Name && x.Artist == track.Artist);
             return new PlayedTrackViewModel
             {
                 RowKey = Guid.NewGuid().ToString(),
@@ -23,7 +24,8 @@ namespace spotify_playlist_tracker.Worker.Mappers
                 Popularity = track.Popularity,
                 Position = 100 - index,
                 TrackLength = track.TrackLength,
-                AddedBy = playlistTracks.Find(x => x.Name == track.Name && x.Artist == track.Artist)?.AddedBy
+                AddedBy = playlistTrack?.AddedBy,
+                AddedByImage = playlistTrack?.AddedByImage
             };
         }
     }
