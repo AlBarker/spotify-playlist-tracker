@@ -67,9 +67,12 @@ namespace spotify_playlist_tracker.Worker.Controllers
             List<PlayedTrackViewModel> playedTrackViewModels = new List<PlayedTrackViewModel>();
             var playedTrackEntities = _storageService.GetPlayedTracks().Result;
 
-            for (var i = 0; i < playedTrackEntities.Count(); i++)
+            if (playedTrackEntities != null)
             {
-                playedTrackViewModels.Add(TrackEntityToPlayedTrackViewModel.Map(playedTrackEntities[i], i, playlistTracks));
+                for (var i = 0; i < playedTrackEntities.Count(); i++)
+                {
+                    playedTrackViewModels.Add(TrackEntityToPlayedTrackViewModel.Map(playedTrackEntities[i], i, playlistTracks));
+                }
             }
 
             ViewBag.PlayedTracks = playedTrackViewModels;

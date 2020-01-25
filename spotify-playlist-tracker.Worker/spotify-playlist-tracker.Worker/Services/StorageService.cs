@@ -57,14 +57,22 @@ namespace spotify_playlist_tracker.Worker.Services
 
             TableContinuationToken token = null;
             var entities = new List<TrackEntity>();
-            do
+            try
             {
-                var queryResult = await tracksTable.ExecuteQuerySegmentedAsync(new TableQuery<TrackEntity>(), token);
-                entities.AddRange(queryResult.Results);
-                token = queryResult.ContinuationToken;
-            } while (token != null);
+                do
+                {
+                    var queryResult = await tracksTable.ExecuteQuerySegmentedAsync(new TableQuery<TrackEntity>(), token);
+                    entities.AddRange(queryResult.Results);
+                    token = queryResult.ContinuationToken;
+                } while (token != null);
 
-            return entities.OrderBy(x => x.Timestamp).ToList();
+                return entities.OrderBy(x => x.Timestamp).ToList();
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+
         }
 
         private CloudTable GetTracksCloudTable()
