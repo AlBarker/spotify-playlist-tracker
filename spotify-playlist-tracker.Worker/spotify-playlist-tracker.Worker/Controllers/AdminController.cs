@@ -81,7 +81,7 @@ namespace spotify_playlist_tracker.Worker.Controllers
             if (_spotifyAuthService.GetToken() != null)
             {
                 var api = new SpotifyWebApi.SpotifyWebApi(_spotifyAuthService.GetToken());
-                var fullPlaylistTracks = api.Playlist.GetPlaylistTracks(SpotifyUri.Make("1233033915", "6LJOm2SkbNEsmANfIGhemx")).Result;
+                var fullPlaylistTracks = api.Playlist.GetPlaylistTracks(SpotifyUri.Make("1233033915", "2CuhODa4xTTlemWopeXG71")).Result;
 
                 foreach (var track in fullPlaylistTracks)
                 {
